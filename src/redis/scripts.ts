@@ -17,6 +17,7 @@ function loadScript(name: string): string {
 // Cargar contenidos de Lua
 export const applyActaLua = loadScript('applyActa.lua');
 export const rateLimitLua = loadScript('rateLimit.lua');
+export const snapshotLua = loadScript('snapshot.lua');
 
 // Registrar comandos personalizados en ioredis para usar EVALSHA automáticamente
 export function registerLuaScripts(): void {
@@ -28,6 +29,11 @@ export function registerLuaScripts(): void {
   redis.defineCommand('rateLimit', {
     numberOfKeys: 1,
     lua: rateLimitLua
+  });
+
+  redis.defineCommand('getSnapshot', {
+    numberOfKeys: 0,
+    lua: snapshotLua
   });
 }
 
@@ -55,5 +61,10 @@ declare module 'ioredis' {
       ttl: string | number,
       maxAllowed: string | number
     ): Promise<[number, number]>;
+
+    getSnapshot(
+      tipo: string,
+      entidadId: string
+    ): Promise<string>;
   }
 }
