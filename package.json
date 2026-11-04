@@ -12,6 +12,11 @@
     "test:watch": "vitest",
     "seed": "tsx scripts/seed.ts",
     "loadtest": "tsx loadtest/simulator.ts",
+    "loadtest:slow": "tsx loadtest/slow-client.ts",
+    "loadtest:jitter": "tsx loadtest/reconnect-jitter.ts",
+    "auditor": "tsx loadtest/auditor-client.ts",
+    "whoami:check": "tsx scripts/whoami-check.ts",
+    "health:check": "tsx scripts/health-check.ts",
     "rebuild:redis": "tsx scripts/rebuild-redis.ts"
   },
   "dependencies": {
