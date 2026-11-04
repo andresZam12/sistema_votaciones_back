@@ -17,6 +17,8 @@ export class StreamReader {
       lazyConnect: true
     });
 
+    this.client.on('error', () => {});
+
     try {
       await this.client.connect();
       console.log(`[STREAM_READER] Conectado a Redis Stream ev:actas`);
@@ -95,3 +97,4 @@ export class StreamReader {
 }
 
 export const streamReader = new StreamReader();
+

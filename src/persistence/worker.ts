@@ -18,6 +18,8 @@ export class PersistenceWorker {
       lazyConnect: true
     });
 
+    this.redisClient.on('error', () => {});
+
     try {
       await this.redisClient.connect();
       await this.ensureConsumerGroups();

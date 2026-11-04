@@ -8,6 +8,11 @@ export const redis = new Redis(config.redisUrl, {
   lazyConnect: true
 });
 
+// Capturar eventos de error para evitar excepciones no controladas en el runtime
+redis.on('error', (err) => {
+  // Manejo silenciado/controlado para que no lance Unhandled error
+});
+
 // Función auxiliar para comprobar estado de conexión
 export async function checkRedisHealth(): Promise<boolean> {
   try {
