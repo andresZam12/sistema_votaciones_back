@@ -3,6 +3,8 @@ import cors from '@fastify/cors';
 import { config } from './config.js';
 import { whoamiRoutes } from './routes/whoami.js';
 import { healthRoutes } from './routes/health.js';
+import { actasRoutes } from './routes/actas.js';
+import { registerLuaScripts } from './redis/scripts.js';
 
 export function buildApp() {
   const app = Fastify({
@@ -14,9 +16,13 @@ export function buildApp() {
     origin: true
   });
 
-  // Registrar rutas base
+  // Registrar comandos Lua en cliente Redis
+  registerLuaScripts();
+
+  // Registrar rutas
   app.register(whoamiRoutes);
   app.register(healthRoutes);
+  app.register(actasRoutes);
 
   return app;
 }

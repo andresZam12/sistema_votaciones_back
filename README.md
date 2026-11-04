@@ -14,9 +14,9 @@ Backend de alta concurrencia para preconteo electoral departamental (1.842 puest
 ## Criterios de Aceptación
 
 ### Requerimientos Funcionales
-- [ ] **RF-1**: Recepción de actas con idempotencia (`idem` + versión en `acta:{id}`).
-- [ ] **RF-2**: Correcciones y convergencia (versión tardía no retrocede estado, deltas matemáticos).
-- [ ] **RF-3**: Acumulados jerárquicos en tiempo real atómicos vía script Lua.
+- [x] **RF-1**: Recepción de actas con idempotencia (`idem` + versión en `acta:{id}`).
+- [x] **RF-2**: Correcciones y convergencia (versión tardía no retrocede estado, deltas matemáticos).
+- [x] **RF-3**: Acumulados jerárquicos en tiempo real atómicos vía script Lua.
 - [ ] **RF-4**: Fan-out sin bloquear el Event Loop (agregación por ventana + lotes de 500 con `setImmediate`).
 - [ ] **RF-5**: Suscripción por tópico (`Map<topic, Set<Conexión>>`).
 - [ ] **RF-6**: Reconexión con recuperación de lo perdido (`Last-Event-ID` con `XRANGE` o snapshot).
@@ -31,7 +31,7 @@ Backend de alta concurrencia para preconteo electoral departamental (1.842 puest
 - [ ] **RT-3**: Ninguna instancia se comunica directamente con otra (coordinación vía Redis).
 - [ ] **RT-4**: Fan-out en lotes cediendo control al Event Loop (instrumentación p50, p99, max).
 - [ ] **RT-5**: Coexistencia de las 3 audiencias con transportes idóneos (HTTP POST, SSE, WS).
-- [ ] **RT-6**: Contrato listo para aplicación offline de jurados (`docs/CONTRATO.md`).
+- [x] **RT-6**: Contrato listo para aplicación offline de jurados (`docs/CONTRATO.md`).
 - [ ] **RT-7**: Tablero de métricas `/ops` y `/ops/data` agregando las 8 instancias.
 - [ ] **RT-8**: Prueba de carga reproducible (simulador de 20.000 clientes concurrentes).
 - [ ] **RT-9**: Contrato y guía de reconexión con jitter para frontend (`docs/RECONEXION.md`).

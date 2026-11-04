@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: Sistema de Preconteo Electoral en Tiempo Real
+  version: 1.0.0
+  description: API de alta disponibilidad y streaming para la jornada electoral.
+paths:
+  /whoami:
+    get:
+      summary: Identificador de instancia
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instancia:
+                    type: string
+
+  /health:
+    get:
+      summary: Chequeo de salud del servicio
+      responses:
+        '200':
+          description: Servicio saludable
+        '503':
+          description: Servicio degradado
+
+  /actas:
+    post:
+      summary: Transmisión de acta E-14 por jurados
+      parameters:
+        - in: header
+          name: x-api-key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - acta
+                - mesa
+                - puesto
+                - municipio
+                - version
+                - jurado
+                - ts_cierre
+                - votos
+                - sufragantes
+                - hash_foto
+                - idem
+              properties:
+                acta:
+                  type: string
+                mesa:
+                  type: integer
+                puesto:
+                  type: integer
+                municipio:
+                  type: integer
+                version:
+                  type: integer
+                jurado:
+                  type: string
+                ts_cierre:
+                  type: integer
+                votos:
+                  type: object
+                  additionalProperties:
+                    type: integer
+                sufragantes:
+                  type: integer
+                hash_foto:
+                  type: string
+                idem:
+                  type: string
+      responses:
+        '201':
+          description: Acta registrada
+        '200':
+          description: Acta ya registrada (idempotencia)
+        '401':
+          description: No autorizado
+        '422':
+          description: Datos inválidos
+        '429':
+          description: Límite de tasa excedido
+        '503':
+          description: Servicio degradado
+
+  /stream:
+    get:
+      summary: Stream Server-Sent Events (SSE) para el público
+      parameters:
+        - in: query
+          name: topic
+          required: true
+          schema:
+            type: string
+            enum: [dep, mun, puesto]
+        - in: header
+          name: Last-Event-ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flujo SSE continuo
+          content:
+            text/event-stream:
+              schema:
+                type: string
