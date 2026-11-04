@@ -23,16 +23,16 @@ Backend de alta concurrencia para preconteo electoral departamental (1.842 puest
 - [x] **RF-7**: Cola de verificación con asignación exclusiva (lock con token de auditor y reaper de expirados).
 - [x] **RF-8**: Presencia y reparto del trabajo con TTL (expiración automática de auditores inactivos).
 - [x] **RF-9**: Clientes lentos y contrapresión (monitoreo de `writableLength`/`bufferedAmount` > 256KB).
-- [ ] **RF-10**: Degradación ante caída de Redis (503 con `Retry-After: 5`) y prevención de avalancha con jitter.
+- [x] **RF-10**: Degradación ante caída de Redis (503 con `Retry-After: 5`) y prevención de avalancha con jitter.
 
 ### Requerimientos Técnicos
 - [ ] **RT-1**: Mínimo 8 instancias detrás de balanceador en Docker Compose.
 - [ ] **RT-2**: Prohibidas sesiones pegajosas (Round-Robin sin `ip_hash`).
 - [ ] **RT-3**: Ninguna instancia se comunica directamente con otra (coordinación vía Redis).
 - [x] **RT-4**: Fan-out en lotes cediendo control al Event Loop (instrumentación p50, p99, max).
-- [ ] **RT-5**: Coexistencia de las 3 audiencias con transportes idóneos (HTTP POST, SSE, WS).
+- [x] **RT-5**: Coexistencia de las 3 audiencias con transportes idóneos (HTTP POST, SSE, WS).
 - [x] **RT-6**: Contrato listo para aplicación offline de jurados (`docs/CONTRATO.md`).
 - [x] **RT-7**: Tablero de métricas `/ops` y `/ops/data` agregando las 8 instancias.
 - [ ] **RT-8**: Prueba de carga reproducible (simulador de 20.000 clientes concurrentes).
-- [ ] **RT-9**: Contrato y guía de reconexión con jitter para frontend (`docs/RECONEXION.md`).
+- [x] **RT-9**: Contrato y guía de reconexión con jitter para frontend (`docs/RECONEXION.md`).
 - [ ] **RT-10**: Despliegue con configuración lista para nube.
