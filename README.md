@@ -20,8 +20,8 @@ Backend de alta concurrencia para preconteo electoral departamental (1.842 puest
 - [x] **RF-4**: Fan-out sin bloquear el Event Loop (agregación por ventana + lotes de 500 con `setImmediate`).
 - [x] **RF-5**: Suscripción por tópico (`Map<topic, Set<Conexión>>`).
 - [x] **RF-6**: Reconexión con recuperación de lo perdido (`Last-Event-ID` con `XRANGE` o snapshot).
-- [ ] **RF-7**: Cola de verificación con asignación exclusiva (lock con token de auditor y reaper de expirados).
-- [ ] **RF-8**: Presencia y reparto del trabajo con TTL (expiración automática de auditores inactivos).
+- [x] **RF-7**: Cola de verificación con asignación exclusiva (lock con token de auditor y reaper de expirados).
+- [x] **RF-8**: Presencia y reparto del trabajo con TTL (expiración automática de auditores inactivos).
 - [x] **RF-9**: Clientes lentos y contrapresión (monitoreo de `writableLength`/`bufferedAmount` > 256KB).
 - [ ] **RF-10**: Degradación ante caída de Redis (503 con `Retry-After: 5`) y prevención de avalancha con jitter.
 

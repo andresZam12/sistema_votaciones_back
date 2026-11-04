@@ -9,6 +9,8 @@ import { opsRoutes } from './routes/ops.js';
 import { registerLuaScripts } from './redis/scripts.js';
 import { streamReader } from './redis/streamReader.js';
 import { metricsPublisher } from './metrics/publisher.js';
+import { auditorWsServer } from './auditores/ws.js';
+import { lockReaper } from './auditores/reaper.js';
 
 export function buildApp() {
   const app = Fastify({
@@ -41,6 +43,12 @@ export async function startServer() {
 
     // Iniciar publicación periódica de métricas operacionales
     metricsPublisher.start();
+
+    // Iniciar el servidor WebSocket de auditores montado en el servidor HTTP
+    auditorWsServer.init(app.server);
+
+    // Iniciar el reaper de locks expirados
+    lockReaper.start();
 
     // Iniciar el lector continuo de Redis Stream en segundo plano
     streamReader.start().catch((err) => {
