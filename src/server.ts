@@ -5,8 +5,10 @@ import { whoamiRoutes } from './routes/whoami.js';
 import { healthRoutes } from './routes/health.js';
 import { actasRoutes } from './routes/actas.js';
 import { streamRoutes } from './routes/stream.js';
+import { opsRoutes } from './routes/ops.js';
 import { registerLuaScripts } from './redis/scripts.js';
 import { streamReader } from './redis/streamReader.js';
+import { metricsPublisher } from './metrics/publisher.js';
 
 export function buildApp() {
   const app = Fastify({
@@ -26,6 +28,7 @@ export function buildApp() {
   app.register(healthRoutes);
   app.register(actasRoutes);
   app.register(streamRoutes);
+  app.register(opsRoutes);
 
   return app;
 }
@@ -35,6 +38,9 @@ export async function startServer() {
   try {
     await app.listen({ port: config.port, host: config.host });
     console.log(`[${config.instanceId}] Servidor escuchando en http://${config.host}:${config.port}`);
+
+    // Iniciar publicación periódica de métricas operacionales
+    metricsPublisher.start();
 
     // Iniciar el lector continuo de Redis Stream en segundo plano
     streamReader.start().catch((err) => {
