@@ -2,7 +2,7 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 COPY package*.json tsconfig.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 COPY src ./src
 COPY scripts ./scripts
@@ -14,11 +14,13 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --ignore-scripts
 
-COPY --from=builder /app/dist ./dist
+COPY --from=builder --chown=node:node /app/dist ./dist
 # Scripts Lua necesarios en runtime
-COPY src/redis/scripts ./dist/redis/scripts
+COPY --chown=node:node src/redis/scripts ./dist/redis/scripts
+
+USER node
 
 EXPOSE 3000
 

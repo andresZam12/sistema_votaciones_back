@@ -70,5 +70,5 @@ export async function startServer() {
 
 // Iniciar automáticamente si se ejecuta directo
 if (process.argv[1]?.endsWith('server.ts') || process.argv[1]?.endsWith('server.js')) {
-  startServer();
+  void startServer();
 }

@@ -160,5 +160,5 @@ async function simularJornada() {
   console.log(`=============================================================\n`);
 }
 
-simularJornada();
+void simularJornada();
 

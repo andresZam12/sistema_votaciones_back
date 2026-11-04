@@ -24,12 +24,12 @@ export class StreamReader {
     try {
       await this.client.connect();
       console.log(`[STREAM_READER] Conectado a Redis Stream ev:actas`);
-      this.pollLoop();
+      void this.pollLoop();
     } catch (err) {
       console.warn(`[STREAM_READER] No se pudo conectar inmediatamente a Redis Stream:`, (err as Error).message);
       // Reintentar en 3 segundos
       setTimeout(() => {
-        if (this.isRunning) this.start();
+        if (this.isRunning) void this.start();
       }, 3000);
     }
   }

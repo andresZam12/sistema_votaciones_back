@@ -26,11 +26,11 @@ export class PersistenceWorker {
       await this.redisClient.connect();
       await this.ensureConsumerGroups();
       console.log(`[PERSISTIDOR] Conectado a Redis Consumer Group '${this.groupName}'`);
-      this.loop();
+      void this.loop();
     } catch (err) {
       console.warn(`[PERSISTIDOR] No se pudo inicializar worker de persistencia:`, (err as Error).message);
       setTimeout(() => {
-        if (this.isRunning) this.start();
+        if (this.isRunning) void this.start();
       }, 5000);
     }
   }
