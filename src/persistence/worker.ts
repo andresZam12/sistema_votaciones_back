@@ -18,7 +18,9 @@ export class PersistenceWorker {
       lazyConnect: true
     });
 
-    this.redisClient.on('error', () => {});
+    this.redisClient.on('error', () => {
+      // Reintentos y desconexiones manejados en loop
+    });
 
     try {
       await this.redisClient.connect();

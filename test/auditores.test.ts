@@ -153,3 +153,4 @@ describe('Auditores y Bloqueo Distribuido (RF-7, RF-8)', () => {
     expect(renuevaInactivo).toBe(false); // NO renueva
   });
 });
+

@@ -15,3 +15,4 @@ if currentOwner == owner then
 else
   return 0
 end
+

@@ -17,7 +17,9 @@ export class StreamReader {
       lazyConnect: true
     });
 
-    this.client.on('error', () => {});
+    this.client.on('error', () => {
+      // Reintentos y desconexiones manejados en pollLoop
+    });
 
     try {
       await this.client.connect();

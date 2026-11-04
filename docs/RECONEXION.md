@@ -91,3 +91,4 @@ export function conectarSSEPúblico(topic: string, onMessage: (data: any) => voi
 
 ## 3. Comportamiento del Encabezado `Retry-After`
 Si el backend responde con código HTTP `503 Service Unavailable` o `429 Too Many Requests`, siempre incluirá la cabecera `Retry-After` (en segundos). El frontend **debe** respetar ese valor mínimo antes de programar su siguiente intento con jitter.
+

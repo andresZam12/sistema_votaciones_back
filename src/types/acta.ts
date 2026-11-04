@@ -22,3 +22,4 @@ export function esActaDudosa(acta: ActaInput): boolean {
   const sumaVotos = Object.values(acta.votos).reduce((acc, v) => acc + v, 0);
   return sumaVotos !== acta.sufragantes;
 }
+

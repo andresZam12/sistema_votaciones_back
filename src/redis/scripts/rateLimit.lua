@@ -14,3 +14,4 @@ end
 
 local allowed = (current <= maxAllowed) and 1 or 0
 return {allowed, current}
+

@@ -131,3 +131,4 @@ export const streamRoutes: FastifyPluginAsync = async (app) => {
     });
   });
 };
+

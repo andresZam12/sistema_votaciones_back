@@ -8,3 +8,4 @@ export const whoamiRoutes: FastifyPluginAsync = async (app) => {
     });
   });
 };
+

@@ -23,3 +23,4 @@ http.get(URL, (res) => {
   console.error('❌ Error conectando al servicio:', err.message);
   process.exit(1);
 });
+

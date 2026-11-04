@@ -71,3 +71,4 @@ describe('Métricas y Tablero /ops', () => {
     expect(body.instancias[0].instancia).toBe('instancia-1');
   });
 });
+

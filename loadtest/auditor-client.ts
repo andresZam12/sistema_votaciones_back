@@ -54,3 +54,4 @@ ws.on('error', (err) => {
   console.error('[AUDITOR-CLIENT] Error en WebSocket:', err.message);
   process.exit(1);
 });
+

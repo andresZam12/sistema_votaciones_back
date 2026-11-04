@@ -26,3 +26,4 @@ Este glosario define los conceptos clave del sistema tanto a nivel del proceso e
 - **Full Jitter:** Estrategia de dispersión aleatoria uniforme en reintentos con retroceso exponencial para evitar la sincronización de miles de clientes en picos destructivos (*Thundering Herd*).
 - **Semáforo / Bloqueo Distribuido (Distributed Lock):** Mecanismo atómico (`SET lock:acta:{id} owner PX 30000 NX`) que asegura que una tarea sea asignada a un único trabajador en todo el clúster.
 - **Compare-and-Delete:** Operación segura de liberación de bloqueo donde se verifica que el identificador del dueño coincida antes de borrar el recurso, evitando liberar bloqueos que ya han sido transferidos a otro auditor tras expirar.
+

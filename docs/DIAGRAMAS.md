@@ -128,3 +128,4 @@ sequenceDiagram
         Note over Worker,Postgres: No se hace XACK.<br/>El mensaje queda en el PEL y se reintenta.<br/>POST /actas continúa a 0 ms de afectación.
     end
 ```
+

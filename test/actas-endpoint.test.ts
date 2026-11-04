@@ -101,3 +101,4 @@ describe('Endpoint POST /actas', () => {
     expect(body.estado).toBe('ya_registrada');
   });
 });
+

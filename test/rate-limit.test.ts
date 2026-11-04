@@ -25,8 +25,8 @@ describe('Rate Limiting (Protección contra saturación)', () => {
         ts_cierre: 1000,
         votos: { C1: 10 },
         sufragantes: 10,
-        hash_foto: 'hash1',
-        idem: 'idem-rl'
+        hash_foto: 'hash1234',
+        idem: 'idem-rl-valido-1234'
       }
     });
 
@@ -37,3 +37,4 @@ describe('Rate Limiting (Protección contra saturación)', () => {
     expect(body.retryAfter).toBe(60);
   });
 });
+

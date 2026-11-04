@@ -129,3 +129,4 @@ Recibe en tiempo real el preconteo acumulado y sus variaciones periódicas.
   - `{"evento": "caso_asignado", "caso": {...}, "token": "..."}`: Caso asignado con lock exclusivo.
   - `{"evento": "caso_tomado_por_otro", "acta": "..."}`: Notificación de bloqueo de un caso.
   - `{"evento": "presencia", "auditores": [...]}`: Lista de auditores activos en tiempo real.
+

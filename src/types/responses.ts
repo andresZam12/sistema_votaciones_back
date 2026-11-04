@@ -30,3 +30,4 @@ export interface HealthResponse {
   redis: 'ok' | 'down';
   instancia: string;
 }
+

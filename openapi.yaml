@@ -115,3 +115,4 @@ paths:
             text/event-stream:
               schema:
                 type: string
+

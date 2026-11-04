@@ -35,3 +35,4 @@ redis.call("XADD", "ev:audit", "MAXLEN", "~", 10000, "*",
 )
 
 return 1
+

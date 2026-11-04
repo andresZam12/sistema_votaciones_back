@@ -98,3 +98,4 @@ describe('Público SSE - TopicManager y Batcher', () => {
     batcher.stop();
   });
 });
+

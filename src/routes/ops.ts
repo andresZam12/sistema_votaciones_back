@@ -134,3 +134,4 @@ export const opsRoutes: FastifyPluginAsync = async (app) => {
     reply.type('text/html').send(html);
   });
 };
+

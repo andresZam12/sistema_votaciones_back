@@ -152,3 +152,4 @@ local streamId = redis.call("XADD", "ev:actas", "MAXLEN", "~", 10000, "*",
 )
 
 return {"OK", streamId, tostring(version), kind, deltasJson}
+

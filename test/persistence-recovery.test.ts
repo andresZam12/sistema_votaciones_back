@@ -50,3 +50,4 @@ describe('Persistencia Durable y Recuperación (Fase 5b)', () => {
     expect(query).toContain('ON CONFLICT (acta, version) DO NOTHING');
   });
 });
+

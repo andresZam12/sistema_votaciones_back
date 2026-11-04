@@ -9,8 +9,8 @@ export const redis = new Redis(config.redisUrl, {
 });
 
 // Capturar eventos de error para evitar excepciones no controladas en el runtime
-redis.on('error', (err) => {
-  // Manejo silenciado/controlado para que no lance Unhandled error
+redis.on('error', () => {
+  // Conexión monitoreada periódicamente por checkRedisHealth
 });
 
 // Función auxiliar para comprobar estado de conexión

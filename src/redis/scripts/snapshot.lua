@@ -66,3 +66,4 @@ local snapshot = {
 }
 
 return cjson.encode(snapshot)
+

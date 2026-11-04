@@ -19,3 +19,4 @@ export async function checkPostgresHealth(): Promise<boolean> {
     return false;
   }
 }
+

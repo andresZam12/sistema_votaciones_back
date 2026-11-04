@@ -133,3 +133,4 @@ Medición empírica reproducible ejecutada con `loadtest/reconnect-jitter.ts` si
 
 ## 9. Conclusión de la Arquitectura
 El sistema logra el equilibrio ideal entre **velocidad crítica en memoria** (Redis Streams + Lua para ingesta a sub-milisegundo y streaming masivo) y **persistencia histórica confiable** (PostgreSQL append-only desacoplado mediante Consumer Groups), garantizando que el preconteo sea veloz, resiliente y 100% defendible.
+

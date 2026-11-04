@@ -22,3 +22,4 @@ COPY src/redis/scripts ./dist/redis/scripts
 EXPOSE 3000
 
 CMD ["node", "dist/server.js"]
+

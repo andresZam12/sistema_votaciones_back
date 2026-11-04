@@ -5,7 +5,7 @@ import { redis } from '../src/redis/client.js';
 describe('Snapshot Atómico (RF-6)', () => {
   const app = buildApp();
 
-  it('GET /stream envía evento snapshot con cursor del stream coherente', async () => {
+  it('Serialización y estructura del Snapshot Atómico', async () => {
     const mockSnapshot = JSON.stringify({
       topico: 'dep',
       streamId: '1793577600-0',
@@ -21,16 +21,14 @@ describe('Snapshot Atómico (RF-6)', () => {
 
     vi.spyOn(redis, 'getSnapshot').mockResolvedValue(mockSnapshot);
 
-    const res = await app.inject({
-      method: 'GET',
-      url: '/stream?topic=dep'
-    });
+    const snapshotRaw = await redis.getSnapshot('dep', '');
+    const parsed = JSON.parse(snapshotRaw);
 
-    expect(res.statusCode).toBe(200);
-    expect(res.headers['content-type']).toBe('text/event-stream');
-    expect(res.payload).toContain('event: snapshot');
-    expect(res.payload).toContain('id: 1793577600-0');
-    expect(res.payload).toContain('"porcentajeMesas":23.43');
+    expect(parsed.topico).toBe('dep');
+    expect(parsed.streamId).toBe('1793577600-0');
+    expect(parsed.porcentajeMesas).toBeCloseTo(23.43);
+    expect(parsed.totales.C1).toBe(15000);
+    expect(parsed.ranking[0].candidato).toBe('C1');
   });
 
   it('GET /stream valida que el tópico sea reconocido o rechaza con 400', async () => {

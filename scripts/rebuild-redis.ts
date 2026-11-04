@@ -71,3 +71,4 @@ if (process.argv[1]?.endsWith('rebuild-redis.ts') || process.argv[1]?.endsWith('
     process.exit(1);
   });
 }
+

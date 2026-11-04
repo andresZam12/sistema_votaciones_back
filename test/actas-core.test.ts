@@ -261,3 +261,4 @@ describe('Núcleo de Actas - Validación, Idempotencia y Convergencia', () => {
     expect(motor.mesasInformadasDep).toBe(2);
   });
 });
+

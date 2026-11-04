@@ -161,3 +161,4 @@ async function simularJornada() {
 }
 
 simularJornada();
+

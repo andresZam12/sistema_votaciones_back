@@ -34,3 +34,4 @@ CREATE TABLE IF NOT EXISTS auditoria_verificacion (
 
 CREATE INDEX IF NOT EXISTS idx_actas_recibida ON actas_versiones(recibida_en);
 CREATE INDEX IF NOT EXISTS idx_auditoria_acta ON auditoria_verificacion(acta);
+
