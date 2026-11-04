@@ -1,4 +1,4 @@
-import Redis from 'ioredis';
+import { Redis } from 'ioredis';
 import { config } from '../config.js';
 
 // Cliente Redis estándar para comandos y escrituras
