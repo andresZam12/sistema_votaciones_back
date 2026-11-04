@@ -1,0 +1,6 @@
+{$PUBLIC_HOSTNAME} {
+	# Sin buffering: necesario para que los eventos SSE lleguen de inmediato (RF-4)
+	reverse_proxy nginx:80 {
+		flush_interval -1
+	}
+}

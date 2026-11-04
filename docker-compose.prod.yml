@@ -1,0 +1,25 @@
+services:
+  # En produccion nginx deja de publicar el puerto 80 al host: Caddy pasa a ser
+  # el unico punto de entrada publico, y le habla a nginx por la red interna de Docker.
+  nginx:
+    ports: !reset []
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: votaciones-caddy
+    environment:
+      PUBLIC_HOSTNAME: ${PUBLIC_HOSTNAME}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - nginx
+    restart: always
+
+volumes:
+  caddy_data:
+  caddy_config:
