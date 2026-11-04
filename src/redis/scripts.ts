@@ -18,6 +18,10 @@ function loadScript(name: string): string {
 export const applyActaLua = loadScript('applyActa.lua');
 export const rateLimitLua = loadScript('rateLimit.lua');
 export const snapshotLua = loadScript('snapshot.lua');
+export const takeCaseLua = loadScript('takeCase.lua');
+export const renewLockLua = loadScript('renewLock.lua');
+export const releaseLockLua = loadScript('releaseLock.lua');
+export const reapExpiredLua = loadScript('reapExpired.lua');
 
 // Registrar comandos personalizados en ioredis para usar EVALSHA automáticamente
 export function registerLuaScripts(): void {
@@ -34,6 +38,26 @@ export function registerLuaScripts(): void {
   redis.defineCommand('getSnapshot', {
     numberOfKeys: 0,
     lua: snapshotLua
+  });
+
+  redis.defineCommand('takeCase', {
+    numberOfKeys: 0,
+    lua: takeCaseLua
+  });
+
+  redis.defineCommand('renewLock', {
+    numberOfKeys: 0,
+    lua: renewLockLua
+  });
+
+  redis.defineCommand('releaseLock', {
+    numberOfKeys: 0,
+    lua: releaseLockLua
+  });
+
+  redis.defineCommand('reapExpired', {
+    numberOfKeys: 0,
+    lua: reapExpiredLua
   });
 }
 
@@ -66,5 +90,25 @@ declare module 'ioredis' {
       tipo: string,
       entidadId: string
     ): Promise<string>;
+
+    takeCase(
+      auditorId: string,
+      token: string,
+      lockTtlMs: string | number
+    ): Promise<[string, string?, string?, string?]>;
+
+    renewLock(
+      actaId: string,
+      owner: string,
+      lockTtlMs: string | number
+    ): Promise<number>;
+
+    releaseLock(
+      actaId: string,
+      owner: string,
+      accion: string
+    ): Promise<number>;
+
+    reapExpired(): Promise<string[]>;
   }
 }
