@@ -5,6 +5,7 @@ COPY package*.json tsconfig.json ./
 RUN npm ci
 
 COPY src ./src
+COPY scripts ./scripts
 RUN npm run build
 
 FROM node:20-alpine AS runner

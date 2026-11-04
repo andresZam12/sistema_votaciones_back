@@ -89,9 +89,10 @@ docker compose logs caddy --tail=50
 
 ## 6. Carga de Topología Electoral (Seed)
 
-Dentro de cualquiera de las réplicas o desde el host con Node.js:
+**Importante**: no use `docker compose exec app npm run seed`. La imagen de producción de `app` no incluye `scripts/` ni las devDependencies (`tsx`), así que ese comando falla. Use el servicio `seed` dedicado, que construye la etapa `builder` (con el código fuente completo) y corre una sola vez:
+
 ```bash
-docker compose exec app npm run seed
+docker compose run --rm seed
 ```
 
 ---

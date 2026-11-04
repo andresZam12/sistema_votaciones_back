@@ -42,6 +42,24 @@ services:
     deploy:
       replicas: 8
 
+  # Servicio de utilidad para cargar la topologia electoral (RF-3).
+  # No se levanta con "docker compose up": usa la etapa "builder" (tiene tsx y
+  # las devDependencies) porque la imagen de produccion de "app" no incluye
+  # scripts/ ni tsx. Ejecutar con: docker compose run --rm seed
+  seed:
+    build:
+      context: .
+      target: builder
+    environment:
+      REDIS_URL: redis://redis:6379
+      DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/votaciones
+    command: ["npx", "tsx", "scripts/seed.ts"]
+    depends_on:
+      - redis
+      - postgres
+    profiles:
+      - tools
+
   nginx:
     image: nginx:alpine
     container_name: votaciones-nginx
