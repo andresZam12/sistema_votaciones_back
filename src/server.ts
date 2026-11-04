@@ -11,6 +11,7 @@ import { streamReader } from './redis/streamReader.js';
 import { metricsPublisher } from './metrics/publisher.js';
 import { auditorWsServer } from './auditores/ws.js';
 import { lockReaper } from './auditores/reaper.js';
+import { persistenceWorker } from './persistence/worker.js';
 
 export function buildApp() {
   const app = Fastify({
@@ -49,6 +50,11 @@ export async function startServer() {
 
     // Iniciar el reaper de locks expirados
     lockReaper.start();
+
+    // Iniciar el worker de persistencia durable a PostgreSQL (Consumer Group)
+    persistenceWorker.start().catch((err) => {
+      console.warn(`[${config.instanceId}] PersistenceWorker no pudo iniciar:`, err.message);
+    });
 
     // Iniciar el lector continuo de Redis Stream en segundo plano
     streamReader.start().catch((err) => {
